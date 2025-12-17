@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  product-testing:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: product-testing-app
+    ports:
+      - "3000:3000"
+    environment:
+      - REACT_APP_API_URL=http://localhost:3001
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
